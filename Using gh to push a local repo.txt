@@ -32,4 +32,4 @@ $ gh repo create
 ✓ Pushed commits to https://github.com/dsfrech/tryLocal.git "origin"? (Y/n)
 
 David@Missile MINGW64 /e/CODE/Python/tryLocal (main)
-$
+$why
