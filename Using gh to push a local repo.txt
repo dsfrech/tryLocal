@@ -1,0 +1,35 @@
+
+David@Missile MINGW64 /e/CODE/Python/tryLocal (main)
+$ gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? HTTPS
+? Authenticate Git with your GitHub credentials? Yes   
+? How would you like to authenticate GitHub CLI? Login with a web browser
+
+! First copy your one-time code: BF2B-DB5C
+Press Enter to open github.com in your browser... 
+✓ Authentication complete.
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+✓ Logged in as dsfrech
+
+David@Missile MINGW64 /e/CODE/Python/tryLocal (main)
+$ gh repo create
+? What would you like to do? Push an existing local repository to GitHub
+? Path to local repository (.)
+
+? Path to local repository .
+? Repository name (tryLocal)
+
+? Repository name tryLocal
+? Description Trying the gh way to push a local repo
+? Visibility Public
+✓ Created repository dsfrech/tryLocal on GitHub
+? Add a remote? Yes
+? What should the new remote be called? (origin)
+? What should the new remote be called? origin
+? Would you like to push commits from the current branch to "origin"? Yes
+✓ Pushed commits to https://github.com/dsfrech/tryLocal.git "origin"? (Y/n)
+
+David@Missile MINGW64 /e/CODE/Python/tryLocal (main)
+$
