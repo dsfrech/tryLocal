@@ -1,3 +1,7 @@
+You've done some work in a local "Project Directory" and want to put
+your work up to github.  This example is using the tryLocal directory
+and we have done the git init, git add, and appropriate git commit -m
+commands already.
 
 David@Missile MINGW64 /e/CODE/Python/tryLocal (main)
 $ gh auth login
