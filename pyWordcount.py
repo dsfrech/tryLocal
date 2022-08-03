@@ -42,25 +42,30 @@ print('Add words to table')
 timesUsed = 0
 priorWord = ''
 wordCount = 0
+data = ''
 
 for w in words:
     if w == priorWord:
         timesUsed += 1
     else:
         if timesUsed != 0:                               # check 1st time switch
-            data = [
-                (priorWord, timesUsed)
-            ]
-            with con:
-                con.executemany(sql, data)
+            if data == '':
+                data = [
+                    (priorWord, timesUsed)
+                ]
+            else:
+                data.append((priorWord, timesUsed))     # we'll do one big insert
         priorWord = w
         timesUsed = 1
         wordCount += 1
+        
+with con:
+    con.executemany(sql, data)
 
 print('Unique words: ',wordCount)
 
-print('Get words with over 200 uses')
+print('Get words with over 10000 uses')
 with con:
-    data = con.execute("SELECT * FROM WORDS WHERE count > 200 ORDER BY count")
+    data = con.execute("SELECT * FROM WORDS WHERE count > 10000 ORDER BY count")
     for row in data:
         print(row)
