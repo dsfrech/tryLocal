@@ -5,7 +5,6 @@
 
 import sqlite3 as sl
 import re
-import sys
 
 FILENAME = 'data\\alice.txt'                            # the book we are going to parse
 DATABASEFILE = 'data\\wordsinbooks.db'                  # where to store the database
@@ -17,8 +16,7 @@ try:
 except FileNotFoundError:
     print(f'Sorry, the file {FILENAME} does not exist.')
 else:
-                                                        # use regex to find the words
-    words = re.findall('\w+',contents.lower())          # make all lower case
+    words = re.findall('\w+',contents.lower())          # lower case, use regex to find the words
     words.sort()                                        # sort it
     num_words = len(words)                              # how many words in the list
     print(f"The file {FILENAME} has about {num_words} words.")
@@ -30,7 +28,7 @@ else:
 print('Table creation')
 con = sl.connect(DATABASEFILE)
 with con:                                               # create the database
-    con.execute("""     
+    con.execute("""
         CREATE TABLE WORDS (
             word TEXT NOT NULL PRIMARY KEY,
             count integer
@@ -53,7 +51,7 @@ for w in words:
         priorWord = w
         timesUsed = 1
         wordCount += 1
-        
+
 with con:
     con.executemany(sql, data)
 
