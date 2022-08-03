@@ -6,31 +6,32 @@
 import sqlite3 as sl
 import sys
 
-filename = 'alice.txt'
-stripChars = ':*,?!.-;/\\|][{}+_()&^%$#@~`<>“"'+"'"      # note ' " and “
+FILENAME = 'data\\alice.txt'
+STRIPCHARS = ':*,?!.-;/\\|][{}+_()&^%$#@~`<>“"'+"'"      # note ' " and “
 
 try:
-    with open(filename, encoding='utf-8') as f:
+    with open(FILENAME, encoding='utf-8') as f:
         contents = f.read()                             # read entire file into contents
 except FileNotFoundError:
-    print(f'Sorry, the file {filename} does not exist.')
+    print(f'Sorry, the file {FILENAME} does not exist.')
 else:
     contents = contents.lower()                         # make all lower case
     words = contents.split()                            # make a list of the words
 
     unsorted = ''
     for w in words:
-        unsorted += w.strip(stripChars) + ' '           # strip junk off words to create a str
+        unsorted += w.strip(STRIPCHARS) + ' '           # strip junk off words to create a str
 
     words = unsorted.split()                            # make it a list again
     words.sort()                                        # sort it
     num_words = len(words)                              # how many words in the list
-    print(f"The file {filename} has about {num_words} words.")
+    print(f"The file {FILENAME} has about {num_words} words.")
 
 createDatabase = input("Create WORD database y/n? ").capitalize()
 if createDatabase != 'Y':
     sys.exit(0)
 
+print('Table creation')
 con = sl.connect('my-test.db')
 with con:
     con.execute("""
@@ -41,8 +42,11 @@ with con:
     """)
 sql = 'INSERT INTO WORDS (word, count) values (?,?)'
 
+print('Add words to table')
 timesUsed = 0
 priorWord = ''
+wordCount = 0
+
 for w in words:
     if w == priorWord:
         timesUsed += 1
@@ -55,8 +59,11 @@ for w in words:
                 con.executemany(sql, data)
         priorWord = w
         timesUsed = 1
+        wordCount += 1
 
+print('Unique words: ',wordCount)
 
+print('Get words with over 200 uses')
 with con:
     data = con.execute("SELECT * FROM WORDS WHERE count > 200 ORDER BY count")
     for row in data:
