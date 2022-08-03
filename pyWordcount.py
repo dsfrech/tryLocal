@@ -23,9 +23,9 @@ else:
     num_words = len(words)                              # how many words in the list
     print(f"The file {FILENAME} has about {num_words} words.")
 
-createDatabase = input("Create WORDS database y/n? ").capitalize()
-if createDatabase != 'Y':
-    sys.exit(0)                                         # EXIT -- EXIT -- EXIT -- EXIT
+# createDatabase = input("Create WORDS database y/n? ").capitalize()
+# if createDatabase != 'Y':
+#     sys.exit(0)                                         # EXIT -- EXIT -- EXIT -- EXIT
 
 print('Table creation')
 con = sl.connect(DATABASEFILE)
@@ -42,19 +42,14 @@ print('Add words to table')
 timesUsed = 0
 priorWord = ''
 wordCount = 0
-data = ''
+data = []                                           # make an empty list for later append
 
 for w in words:
     if w == priorWord:
         timesUsed += 1
     else:
-        if timesUsed != 0:                               # check 1st time switch
-            if data == '':
-                data = [
-                    (priorWord, timesUsed)
-                ]
-            else:
-                data.append((priorWord, timesUsed))     # we'll do one big insert
+        if timesUsed != 0:                          # check 1st time switch
+            data.append((priorWord, timesUsed))     # we'll do one big insert
         priorWord = w
         timesUsed = 1
         wordCount += 1
