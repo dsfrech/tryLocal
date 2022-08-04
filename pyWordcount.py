@@ -29,12 +29,14 @@ else:
 print('Table creation')
 con = sl.connect(DATABASEFILE)
 with con:                                               # create the database
+    con.execute("DROP TABLE WORDS")
     con.execute("""
         CREATE TABLE WORDS (
             word TEXT NOT NULL PRIMARY KEY,
             count integer
         );
     """)
+
 sql = 'INSERT INTO WORDS (word, count) values (?,?)'    # specify the SQL insert stmt
 
 print('Add words to table')
