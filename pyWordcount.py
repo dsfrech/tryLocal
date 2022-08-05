@@ -1,6 +1,6 @@
 """
     This program uses Sqlite3 to store the words in a book and how many
-    times the words are used.  The book is from https://gutenberg.org 
+    times the words are used.  The book is from https://gutenberg.org
     and stored as a text file in alice.txt.
 """
 

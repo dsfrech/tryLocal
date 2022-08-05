@@ -1,0 +1,6 @@
+Index of books is available at https://gutenberg.org/cache/epub/feeds/pg_catalog.csv
+Since it is in CSV format, should be able to use the lib/csv.py functions to parse 
+    and put it in a BOOKS table
+Query the user to select a book using tkinter
+Warn if language is not english and ask them again
+Download the text version of the book and process it
