@@ -6,9 +6,12 @@
 
 import sqlite3 as sl
 import re
+import os
 
 FILENAME = 'data\\alice.txt'                            # the book we are going to parse
 DATABASEFILE = 'data\\wordsinbooks.db'                  # where to store the database
+# DATABASEFILE = ':memory:'                  # where to store the database
+
 STRIPCHARS = ':*,?!.-;/\\|][{}+_()&^%$#@~`<>“"'+"'"     # note ' " and “
 
 try:
@@ -26,10 +29,12 @@ else:
 # if createDatabase != 'Y':
 #     sys.exit(0)                                         # EXIT -- EXIT -- EXIT -- EXIT
 
-print('Table creation')
+if os.path.isfile(DATABASEFILE):                    # if the database exists drop the table
+    os.remove(DATABASEFILE)
+
+print('Database and Table creation')
 con = sl.connect(DATABASEFILE)
 with con:                                               # create the database
-    con.execute("DROP TABLE WORDS")
     con.execute("""
         CREATE TABLE WORDS (
             word TEXT NOT NULL PRIMARY KEY,
